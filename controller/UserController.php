@@ -27,7 +27,12 @@ class UserController{
             'update_at'=>Carbon::now("Asia/Yangon")
         ];
         Validator::requireValidation($data,'/');
-        User::build()->update($data,$_SESSION['user'][0]->id);
+        $uniqueCheck=User::exists(['email'=>$email],$id=$_SESSION['user'][0]->id);
+        if($uniqueCheck){
+            return redirect('/?duplicateEmail');
+        }
+        $d=User::build()->update($data,$_SESSION['user'][0]->id);
+        return redirect('/?success');
     }
     public function userDelete(){
         $id=$_POST['userId'];

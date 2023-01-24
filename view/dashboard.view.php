@@ -135,6 +135,14 @@
                             </div>
 
                             <?php endif ?>
+                            <?php if(error('success')): ?>
+
+                                <div class="alert alert-success alert-dismissible fade show" role="alert">
+                                    Successfully Updated
+                                    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                                </div>
+
+                            <?php endif ?>
                         </div>
 
                         <div class="mb-3">

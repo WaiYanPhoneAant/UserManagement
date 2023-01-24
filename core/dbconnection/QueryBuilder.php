@@ -33,12 +33,16 @@ trait QueryBuilder{
     }
 
     //search data from database
-    public static function exists(Array $uniqueData)
+    public static function exists(Array $uniqueData,$id='')
     {    # code..
         $pdo=static::build();
         foreach ($uniqueData as $dataKey => $dataValue) {
             # code...
-             $user=$pdo->quaryPrepare("SELECT email FROM $pdo->table WHERE $dataKey='$dataValue' ");
+             if($id){
+                $user=$pdo->quaryPrepare("SELECT email FROM $pdo->table WHERE $dataKey='$dataValue' AND id!=$id");
+             }else{
+                $user=$pdo->quaryPrepare("SELECT email FROM $pdo->table WHERE $dataKey='$dataValue' ");
+             }
         }
        return $user;
     }
@@ -64,11 +68,12 @@ trait QueryBuilder{
     public function update(Array $data,$id){
         $queryData='';
         foreach ($data as $dataKey =>$dataValue) {
+            $_SESSION['user'][0]->$dataKey=$dataValue;
             $queryData.=$dataKey."="."'$dataValue',";
         }
         $queryData=rtrim($queryData,',');
         $sql="UPDATE $this->table SET ".$queryData. " where id='$id' " ;
-        $this->quaryPrepare($sql);
+        return $this->quaryPrepare($sql);
     }
 
     // raw queryCreation

@@ -1,0 +1,19 @@
+{
+
+    "autoload": {
+        "psr-4": {
+            "db\\":"core/dbconnection/",
+            "controller\\":"controller/",
+            "Route\\":"route/"
+        },
+        "classmap": [
+            "./"
+        ],
+        "files": [
+            "./core/helper/function.php"   
+        ]
+    },
+    "require": {
+        "nesbot/carbon": "^2.65"
+    }
+}

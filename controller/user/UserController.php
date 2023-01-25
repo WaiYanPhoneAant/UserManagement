@@ -23,6 +23,15 @@ class UserController{
     public function userProfile(){
         return view('user/User');
     }
+    public function userProfileUpdatePage(){
+        $user=User::exists(['id'=>$_SESSION['user'][0]->id]);
+        if($user){
+            return view('updateUserData',['data'=>$user]);
+        }else{
+            return redirect('/404');
+        }
+        return view('updateUserData',$user);
+    }
     //update Login user data update 
     public function userProfileUpdate(){
         $name=$_POST['name'];
@@ -33,11 +42,11 @@ class UserController{
             'update_at'=>Carbon::now("Asia/Yangon")
         ];
         $id=$_SESSION['user'][0]->id;
-        $this->validateUpdate($data,$id,'/?');
+        $this->validateUpdate($data,$id,'/user/profile/update/page?');
         $address=$_POST['address'];
         $data['address']=$address;
         $d=User::build()->update($data,$id,'session');
-        return redirect('/?success');
+        return redirect('/user/profile/update/page?success');
 
     }
 

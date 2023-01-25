@@ -36,7 +36,7 @@
                     </div>
                 </div>
                 <?php  if(isset($_REQUEST['search'])): ?>
-                    <a href="?" class="btn btn-secondary">
+                    <a href="?" class="btn btn-secondary m-2">
                         clear search="<?= $_REQUEST['search'] ?>"
                     </a>
                 <?php endif ?>
@@ -48,7 +48,9 @@
                     <th scope="col">email</th>
                     <th scope="col">Address</th>
                     <th scope="col">role</th>
-                    <th scope="col">Actions</th>
+                    <?php if(roleCheck($session->role,'admin')): ?>
+                        <th scope="col">Actions</th>
+                    <?php endif ?>
                     </tr>
                 </thead>
                 <tbody>
@@ -67,40 +69,43 @@
                         ">
                             <?= $d->role_name ?>
                         </td>
-                        <?php if($d->id != $session->id): ?>
-                            <?php if(roleCheck($session->role,'admin')): ?>
-                            <td>
-                                <a href="/admin/user/update/page?user=<?= $d->id ?>" class="btn btn-sm  btn-primary p-2">Edit</a>
-                                <!-- Button trigger modal -->
-                                <button type="button" class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#deleteModal<?= $d->id ?>">
-                                Delete
-                                </button>
+                        <?php if(roleCheck($session->role,'admin')): ?>
+                            <?php if($d->id != $session->id): ?>
+                            
+                                <td>
+                                    <a href="/admin/user/update/page?user=<?= $d->id ?>" class="btn btn-sm  btn-primary p-2">Edit</a>
+                                    <!-- Button trigger modal -->
+                                    <button type="button" class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#deleteModal<?= $d->id ?>">
+                                    Delete
+                                    </button>
 
-                                <!-- Modal -->
-                                <div class="modal fade" id="deleteModal<?= $d->id ?>" tabindex="-1" aria-labelledby="deleteModal<?= $d->id ?>" aria-hidden="true">
-                                    <div class="modal-dialog modal-dialog-centered">
-                                        <div class="modal-content">
-                                        <div class="modal-header">
-                                            <h1 class="modal-title fs-5  text-danger" id="deleteModal">Attention !!</h1>
-                                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                                        </div>
-                                        <div class="modal-body">
-                                            .Are you sure to delete user,<?=  $d->name  ?>?
-                                        </div>
-                                        <div class="modal-footer">
-                                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                                            <form action="user/delete" method="POST">
-                                                <input type="hidden" name="userId" value="<?= $d->id ?>">
-                                                <button type="submit" class="btn btn-danger">Delete</button>
-                                            </form>
-                                        </div>
+                                    <!-- Modal -->
+                                    <div class="modal fade" id="deleteModal<?= $d->id ?>" tabindex="-1" aria-labelledby="deleteModal<?= $d->id ?>" aria-hidden="true">
+                                        <div class="modal-dialog modal-dialog-centered">
+                                            <div class="modal-content">
+                                            <div class="modal-header">
+                                                <h1 class="modal-title fs-5  text-danger" id="deleteModal">Attention !!</h1>
+                                                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                            </div>
+                                            <div class="modal-body">
+                                                .Are you sure to delete user,<?=  $d->name  ?>?
+                                            </div>
+                                            <div class="modal-footer">
+                                                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                                                <form action="user/delete" method="POST">
+                                                        <?php csrfCheck::active(); ?>
+                                                    <input type="hidden" name="userId" value="<?= $d->id ?>">
+                                                    <button type="submit" class="btn btn-danger">Delete</button>
+                                                </form>
+                                            </div>
+                                            </div>
                                         </div>
                                     </div>
-                                </div>
-                            </td>
+                                </td>
+                            
+                            <?php else: ?>
+                                <td>###</td>
                             <?php endif ?>
-                        <?php else: ?>
-                            <td>###</td>
                         <?php endif ?>
                     </tr>
                     <tr>
@@ -118,6 +123,9 @@
                         <span class="badge text-bg-success ms-2"><?= $session->role===2? "Admin":'Moderator' ?></span>
                     </div>
                     <form action="/admin/update/data" method="POST">
+                        <?php
+                            csrfCheck::active(); 
+                        ?>
                         <div class="mb-2">
                             <?php if(error('duplicateEmail')): ?>
 
@@ -161,7 +169,7 @@
 
                         <div class="mb-3 d-flex justify-content-between align-items-center">
                             <button type="submit" class="btn btn-primary">Update</button>
-                  
+                            <a href="/password/update/page" class="btn btn-link ">Reset Password</a>
                         </div>
 
                     </form>
@@ -179,4 +187,5 @@
 
 
 <?php require("view/components/footer.view.php") ?> 
+
 

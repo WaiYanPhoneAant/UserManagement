@@ -1,11 +1,13 @@
 <?php
 
 use Route\Route;
+
 use controller\mainController;
 use controller\UserController;
 use controller\AdminController;
 use controller\loginController;
 use controller\LogoutController;
+use controller\PasswordController;
 use controller\RegisterController;
 
 
@@ -58,6 +60,12 @@ Route::post('/logout',[LogoutController::class,'logout']);
 
 
                            //User section
+//direct user profile
 Route::get('/user/profile',[UserController::class,'userProfile']);
 Route::get('/user/profile/update/page',[UserController::class,'userProfileUpdatePage']);
-Route::get('/user/profile/update',[UserController::class,'userProfileUpdate']);
+Route::post('/user/profile/update',[UserController::class,'userProfileUpdate']);
+
+
+// password manage
+Route::get('/password/update/page',[PasswordController::class,'passwordUpdatePage']);
+Route::post('/password/update',[PasswordController::class,'passwordUpdate']);

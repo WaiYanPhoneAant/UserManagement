@@ -4,7 +4,7 @@
 return [
     "database"=>[
         'dbhost'=>'localhost',
-        'dbname'=>'URM',
+        'dbname'=>'test123',
         'dbuser'=>'Hiro',
         'dbpassword'=>'wypa',
     ]

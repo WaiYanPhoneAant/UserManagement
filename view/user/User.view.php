@@ -16,10 +16,10 @@
             <div class="mb-4">
                 <h6 class="card-subtitle mb-2 text-muted">Address - <span class="text-primary"><?= $session->address ?></span></h6>
             </div>
-            <a href="#" class="btn btn-sm btn-success ">Update Data</a>
+            <a href="/user/profile/update/page" class="btn btn-sm btn-success ">Update Data</a>
         </div>
         <div class="card-footer d-flex justify-content-between">
-            <a href="#" class="card-link ">Forget Password</a>
+            <a href="/password/update/page" class="card-link ">Forget Password</a>
             <form action="../logout" method="POST">
                 <button type="submit" class="btn btn-link text-danger">Log Out</button>
             </form>

@@ -3,7 +3,6 @@
 namespace Auth;
 
 use model\User;
-session_start();
 
 
 class Auth{

@@ -38,7 +38,7 @@ class connection{
                $this->dbuser,
                $this->dbpassword,
            );
-           $pdo->prepare('select * from users');
+        //    $pdo->prepare('select * from users');
            
        } catch (PDOException $e) {
            echo $e;

@@ -47,7 +47,7 @@ class mainController{
         JOIN  role ON users.role=role.role_id WHERE role.role_name='$role'";
             if(!isset($_REQUEST['search'])){
                 $data=User::build()->executeQuery($query);
-            }else{ echo "hello";
+            }else{ 
                 $serachKey=$_REQUEST['search'];
                 if(!$serachKey==""){
                     $query.="AND name LIKE '%$serachKey%'";

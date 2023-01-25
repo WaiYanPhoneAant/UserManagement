@@ -4,6 +4,7 @@ namespace controller;
 
 use Auth\Auth;
 use Auth\Role;
+use csrfCheck;
 use model\User;
 use Carbon\Carbon;
 use Validator\Validator;
@@ -22,6 +23,7 @@ class AdminController{
 
     //update Login user data update 
     public function updateLoginUserData(){
+        csrfCheck::check();
         $name=$_POST['name'];
         $email=$_POST['email'];
         $data=[
@@ -54,6 +56,8 @@ class AdminController{
 
     //update user data from admin
     public function AdminUpdateUserData(){
+
+        csrfCheck::check();
         $this->currentRoleCheck();
         $id=$_POST['userId'];
         $name=$_POST['name'];
@@ -85,6 +89,7 @@ class AdminController{
 
     //user account delete
     public function userDelete(){
+        csrfCheck::check();
         $this->currentRoleCheck();
         $id=$_POST['userId'];
         if($id != $_SESSION['user'][0]->id){

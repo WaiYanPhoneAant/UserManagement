@@ -1,7 +1,7 @@
 # User Management System with Pure PHP
 user management with pure php(framework thinking)
 
-## Project SetUP
+## Project Setup
 ```bash
   git clone https://github.com/WaiYanPhoneAant/UserManagement.git
 ```

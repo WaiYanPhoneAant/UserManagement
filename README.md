@@ -4,6 +4,7 @@ user management with pure php(framework thinking)
 ## Project Setup
 ```bash
   git clone https://github.com/WaiYanPhoneAant/UserManagement.git
+  cd UserManagement
 ```
 
 

@@ -11,7 +11,7 @@ class Route{
     ];
     private function __construct()
     {
-        //private to access control class
+        //private access 
     }
     // build route class
     private static function build(){

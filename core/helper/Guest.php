@@ -12,8 +12,6 @@ class Guest{
             return redirect('/');
         }
     }
-
-    
 }
 
 

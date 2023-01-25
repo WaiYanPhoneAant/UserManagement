@@ -14,8 +14,9 @@ class Auth{
             redirect('/loginPage');
         }
     }
+    //check auth by email and password
     public static function authByEmailAndPassword(string $table,string $email,string $password){
-        $user=User::build()->quaryPrepare("SELECT * FROM $table WHERE email='$email' "); 
+        $user=User::build()->executeQuery("SELECT * FROM $table WHERE email='$email' "); 
         $hashPassword=$user[0]->password;
         if($hashPassword){
             if(password_verify($password, $hashPassword)) {

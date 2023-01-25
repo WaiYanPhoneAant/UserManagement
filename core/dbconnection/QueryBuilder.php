@@ -29,7 +29,7 @@ trait QueryBuilder{
 
     // get all Data from database
     public function getAll(){
-        return  $this->quaryPrepare("select * from $this->table");
+        return  $this->executeQuery("select * from $this->table");
     }
 
     //search data from database
@@ -39,9 +39,9 @@ trait QueryBuilder{
         foreach ($uniqueData as $dataKey => $dataValue) {
             # code...
              if($id){
-                $user=$pdo->quaryPrepare("SELECT email FROM $pdo->table WHERE $dataKey='$dataValue' AND id!=$id");
+                $user=$pdo->executeQuery("SELECT * FROM $pdo->table WHERE $dataKey='$dataValue' AND id!=$id");
              }else{
-                $user=$pdo->quaryPrepare("SELECT email FROM $pdo->table WHERE $dataKey='$dataValue' ");
+                $user=$pdo->executeQuery("SELECT * FROM $pdo->table WHERE $dataKey='$dataValue' ");
              }
         }
        return $user;
@@ -65,19 +65,21 @@ trait QueryBuilder{
 
 
     //data update
-    public function update(Array $data,$id){
+    public function update(Array $data,$id,$session=''){
         $queryData='';
         foreach ($data as $dataKey =>$dataValue) {
-            $_SESSION['user'][0]->$dataKey=$dataValue;
+            if($session){
+                $_SESSION['user'][0]->$dataKey=$dataValue;
+            }
             $queryData.=$dataKey."="."'$dataValue',";
         }
         $queryData=rtrim($queryData,',');
         $sql="UPDATE $this->table SET ".$queryData. " where id='$id' " ;
-        return $this->quaryPrepare($sql);
+        return $this->executeQuery($sql);
     }
 
-    // raw queryCreation
-    public function quaryPrepare($query){
+    //execute Prepared query
+    public function executeQuery($query){
         $pdo=$this->pdo;
         $stm=$pdo->prepare($query);
         $stm->execute();

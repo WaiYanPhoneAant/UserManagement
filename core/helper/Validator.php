@@ -8,8 +8,8 @@ use model\User;
 class Validator{
     public static function requireValidation(Array $data,$route)
     {
-        # code..
-        $filter=array_filter($data,fn($data) => !trim($data)); 
+        # code
+        $filter=array_filter($data,fn($data) =>!trim($data) ); 
         $result=array_keys($filter);
         if($result){
             $error="?";
@@ -17,7 +17,8 @@ class Validator{
                 echo $r."<br>";
                 $error.=$r."&";
            }
-           return redirect(rtrim($route.$error,"?"));
+           $error=trim($error,"?");
+           return redirect(trim($route.$error,"?"));
         }
         return ;
     }
@@ -26,7 +27,7 @@ class Validator{
 
         foreach ($uniqueData as $dataKey => $dataValue) {
             # code...
-            return $user=User::build()->quaryPrepare("SELECT email FROM $table WHERE $dataKey='$dataValue' ");
+            return $user=User::build()->executeQuery("SELECT email FROM $table WHERE $dataKey='$dataValue' ");
         }
         // 
     }

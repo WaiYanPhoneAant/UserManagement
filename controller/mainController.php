@@ -13,32 +13,31 @@ class mainController{
         Auth::check();
         Role::checkAdmin();
     }
+    //direct dashboard
     public function dashboard(){
         $query= "SELECT users.*,role_name ,role_id From users LEFT
         JOIN  role ON users.role=role.role_id";
         if(!isset($_REQUEST['search'])){
-            $data=User::build()->quaryPrepare($query);
+            $data=User::build()->executeQuery($query);
         }else{
             $serachKey=$_REQUEST['search'];
             if(!$serachKey==""){
                 $query.=" where name LIKE '%$serachKey%' OR email LIKE '%$serachKey%'";
-                $data=User::build()->quaryPrepare($query);
             }
         }
+        $data=User::build()->executeQuery($query);
         return view('dashboard',['data'=>$data]);
     }
-
+    //filterfunction
     public function userOnlyDashboard(){
         $this->userFilter('user');
     }
     public function adminsOnlyDashboard()
     {
-        # code...
         $this->userFilter('admin');
     }
     public function moderatorsOnlyDashboard()
     {
-        # code...
         $this->userFilter('moderator');
     }
 
@@ -47,14 +46,15 @@ class mainController{
         $query= "SELECT users.*,role_name ,role_id From users LEFT
         JOIN  role ON users.role=role.role_id WHERE role.role_name='$role'";
             if(!isset($_REQUEST['search'])){
-                $data=User::build()->quaryPrepare($query);
-            }else{
+                $data=User::build()->executeQuery($query);
+            }else{ echo "hello";
                 $serachKey=$_REQUEST['search'];
                 if(!$serachKey==""){
                     $query.="AND name LIKE '%$serachKey%'";
-                    $data=User::build()->quaryPrepare($query);
+                    $data=User::build()->executeQuery($query);
                 }
             }
+           
         return view('dashboard',['data'=>$data,'page'=>$role]);
     }
     public function create(){

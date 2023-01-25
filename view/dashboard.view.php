@@ -1,19 +1,9 @@
-
-
-
-<?php 
-
-    $session=$_SESSION['user'][0];
-    
-?> 
+<?php $session=$_SESSION['user'][0];?> 
 <!-- extends header -->
 <?php require("view/components/header.view.php") ?>
-
-
-
 <div class="container-md container-fluid mt-3 mb-5">
     <div class="mb-5 col-12 d-flex justify-content-between align-items-center">
-        <div class="header">
+        <div class="header text-primary">
             <h1>
                 User List
             </h1>
@@ -28,7 +18,7 @@
             <div class="col-lg-8 col-md-12">
                 <div class="mb-3 d-flex justify-content-between align-items-center">
                     <div class="m-1">
-                        <form class="d-flex" role="search" action="">
+                        <form class="d-flex" action="">
                             <input class="form-control me-2" type="search" name="search" placeholder="Search" value="<?= isset($_REQUEST['search'])? $_REQUEST['search']:'' ?>" aria-label="Search">
                             <button class="btn btn-outline-success" type="submit">Search</button>
                         </form>
@@ -78,35 +68,37 @@
                             <?= $d->role_name ?>
                         </td>
                         <?php if($d->id != $session->id): ?>
-                        <td>
-                            <a href="" class="btn btn-sm  btn-primary p-2">Edit</a>
-                            <!-- Button trigger modal -->
-                            <button type="button" class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#deleteModal<?= $d->id ?>">
-                            Delete
-                            </button>
+                            <?php if(roleCheck($session->role,'admin')): ?>
+                            <td>
+                                <a href="/admin/user/update/page?user=<?= $d->id ?>" class="btn btn-sm  btn-primary p-2">Edit</a>
+                                <!-- Button trigger modal -->
+                                <button type="button" class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#deleteModal<?= $d->id ?>">
+                                Delete
+                                </button>
 
-                            <!-- Modal -->
-                            <div class="modal fade" id="deleteModal<?= $d->id ?>" tabindex="-1" aria-labelledby="deleteModal<?= $d->id ?>" aria-hidden="true">
-                                <div class="modal-dialog modal-dialog-centered">
-                                    <div class="modal-content">
-                                    <div class="modal-header">
-                                        <h1 class="modal-title fs-5  text-danger" id="deleteModal">Attention !!</h1>
-                                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                                    </div>
-                                    <div class="modal-body">
-                                        .Are you sure to delete user,<?=  $d->name  ?>?
-                                    </div>
-                                    <div class="modal-footer">
-                                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                                        <form action="user/delete" method="POST">
-                                            <input type="hidden" name="userId" value="<?= $d->id ?>">
-                                            <button type="submit" class="btn btn-danger">Delete</button>
-                                        </form>
-                                    </div>
+                                <!-- Modal -->
+                                <div class="modal fade" id="deleteModal<?= $d->id ?>" tabindex="-1" aria-labelledby="deleteModal<?= $d->id ?>" aria-hidden="true">
+                                    <div class="modal-dialog modal-dialog-centered">
+                                        <div class="modal-content">
+                                        <div class="modal-header">
+                                            <h1 class="modal-title fs-5  text-danger" id="deleteModal">Attention !!</h1>
+                                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                        </div>
+                                        <div class="modal-body">
+                                            .Are you sure to delete user,<?=  $d->name  ?>?
+                                        </div>
+                                        <div class="modal-footer">
+                                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                                            <form action="user/delete" method="POST">
+                                                <input type="hidden" name="userId" value="<?= $d->id ?>">
+                                                <button type="submit" class="btn btn-danger">Delete</button>
+                                            </form>
+                                        </div>
+                                        </div>
                                     </div>
                                 </div>
-                            </div>
-                        </td>
+                            </td>
+                            <?php endif ?>
                         <?php else: ?>
                             <td>###</td>
                         <?php endif ?>
@@ -164,7 +156,7 @@
 
                         <div class="mb-3">
                             <label for="address" class="form-label">Address</label>
-                            <input type="text" name="address" class="form-control" id="name" value="<?php ?>" >
+                            <input type="text" name="address" class="form-control" id="name" value="<?= $session->address ?>" >
                         </div>
 
                         <div class="mb-3 d-flex justify-content-between align-items-center">

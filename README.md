@@ -28,3 +28,9 @@ user management with pure php(framework thinking)
 ```bash
    php -S localhost:8000
 ```
+
+###  Now You Can Start Login with admin account
+```info
+    email=admin@gmail.com
+    password=admin
+```

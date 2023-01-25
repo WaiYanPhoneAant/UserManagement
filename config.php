@@ -4,8 +4,8 @@
 return [
     "database"=>[
         'dbhost'=>'localhost',
-        'dbname'=>'test123',
-        'dbuser'=>'Hiro',
-        'dbpassword'=>'wypa',
+        'dbname'=>'mysql',
+        'dbuser'=>'root',
+        'dbpassword'=>'',
     ]
 ];

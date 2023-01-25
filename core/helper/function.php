@@ -22,9 +22,8 @@ function view($view,Array $data=[]){
 
 //redirect route
 function redirect($route,$data=[]){
-    $url="http://localhost:8000"."$route";
-     header("location: $url");
-     exit();
+    header("location: $route");
+    exit();
 }
 
 // check error

@@ -15,7 +15,6 @@ class RegisterController{
     public function registerPage(){
         return view('register');
     }
-
     //process of register
     public function register(){
         $name=$_POST['name'];

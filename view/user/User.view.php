@@ -21,6 +21,7 @@
         <div class="card-footer d-flex justify-content-between">
             <a href="/password/update/page" class="card-link ">Forget Password</a>
             <form action="../logout" method="POST">
+                <?php csrfCheck::active(); ?>
                 <button type="submit" class="btn btn-link text-danger">Log Out</button>
             </form>
         </div>

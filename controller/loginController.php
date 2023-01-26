@@ -16,7 +16,6 @@ class loginController{
        
         return view('login');
     }
-
     //login process
     public function login(){
         $email=$_POST['email'];

@@ -8,15 +8,17 @@ use model\User;
 use Validator\Validator;
 
 class PasswordController{
-    //middle ware
+    //middleware
     public function __construct()
     {
         Auth::check();
     }
 
+    //redirect pw page
     public function passwordUpdatePage(){
         return view('password/passwordUpdate');
     }
+    //update user password
     public function passwordUpdate(){
         csrfCheck::check();
         $id=$_SESSION['user'][0]->id;

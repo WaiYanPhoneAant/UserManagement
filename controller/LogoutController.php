@@ -3,11 +3,13 @@
 
 namespace controller;
 
+use csrfCheck;
+
 class logoutController{
 
     //direct to login page
     public function logout(){
-        session_start();
+        csrfCheck::check();
         session_unset();
         return redirect('/loginPage');
     }

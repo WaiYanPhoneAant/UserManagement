@@ -1,6 +1,6 @@
 
 --Database Creation
-CREATE DATABASE URM;
+CREATE DATABASE DatabaseName;
 
 
 -- user Creation

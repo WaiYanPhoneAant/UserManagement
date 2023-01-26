@@ -10,36 +10,37 @@
         </div>
         <div class="btn">
             <form action="/logout" method="POST">
+            <?php csrfCheck::active(); ?>
                 <button type="submit" class="btn btn-danger">Log Out</button>
             </form>
         </div>
     </div>
     <div class="row">
-            <div class="col-lg-8 col-md-12">
-                <div class="mb-3 d-flex justify-content-between align-items-center">
-                    <div class="m-1">
-                        <form class="d-flex" action="">
-                            <input class="form-control me-2" type="search" name="search" placeholder="Search" value="<?= isset($_REQUEST['search'])? $_REQUEST['search']:'' ?>" aria-label="Search">
-                            <button class="btn btn-outline-success" type="submit">Search</button>
-                        </form>
-                    </div>
-                    <div class="m-1">
-                        <button class="btn btn-secondary dropdown-toggle text-capitalize" type="button" data-bs-toggle="dropdown" aria-expanded="false">
-                            <?= $page??'All Users' ?>
-                        </button>
-                        <ul class="dropdown-menu">
-                            <li><a class="dropdown-item" href="/">All Users</a></li>
-                            <li><a class="dropdown-item" href="/admins">Admin</a></li>
-                            <li><a class="dropdown-item" href="/moderators">Moderator</a></li>
-                            <li><a class="dropdown-item" href="/users">User</a></li>
-                        </ul>
-                    </div>
+        <div class="col-lg-8 col-md-12">
+            <div class="mb-3 d-flex justify-content-between align-items-center">
+                <div class="m-1">
+                    <form class="d-flex" action="">
+                        <input class="form-control me-2" type="search" name="search" placeholder="Search" value="<?= isset($_REQUEST['search'])? $_REQUEST['search']:'' ?>" aria-label="Search">
+                        <button class="btn btn-outline-success" type="submit">Search</button>
+                    </form>
                 </div>
-                <?php  if(isset($_REQUEST['search'])): ?>
-                    <a href="?" class="btn btn-secondary m-2">
-                        clear search="<?= $_REQUEST['search'] ?>"
-                    </a>
-                <?php endif ?>
+                <div class="m-1">
+                    <button class="btn btn-secondary dropdown-toggle text-capitalize" type="button" data-bs-toggle="dropdown" aria-expanded="false">
+                        <?= $page??'All Users' ?>
+                    </button>
+                    <ul class="dropdown-menu">
+                        <li><a class="dropdown-item" href="/">All Users</a></li>
+                        <li><a class="dropdown-item" href="/admins">Admin</a></li>
+                        <li><a class="dropdown-item" href="/moderators">Moderator</a></li>
+                        <li><a class="dropdown-item" href="/users">User</a></li>
+                    </ul>
+                </div>
+            </div>
+            <?php  if(isset($_REQUEST['search'])): ?>
+                <a href="?" class="btn btn-secondary m-2">
+                    clear search="<?= $_REQUEST['search'] ?>"
+                </a>
+            <?php endif ?>
             <table class="table table-border border table-striped table-hove table-responsive-md">
                 <thead>
                     <tr>

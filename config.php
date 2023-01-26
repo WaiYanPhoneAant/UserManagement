@@ -4,7 +4,7 @@
 return [
     "database"=>[
         'dbhost'=>'localhost',
-        'dbname'=>'mysql',
+        'dbname'=>'database',
         'dbuser'=>'root',
         'dbpassword'=>'',
     ]

@@ -20,7 +20,6 @@ class AdminController{
         Role::checkAdmin();
     }
 
-
     //update Login user data update 
     public function updateLoginUserData(){
         csrfCheck::check();

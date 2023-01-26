@@ -19,6 +19,7 @@ class UserController{
         Auth::check();
         role::checkUser();
     }
+
     //login user profile
     public function userProfile(){
         return view('user/User');
@@ -32,7 +33,8 @@ class UserController{
         }
         return view('updateUserData',$user);
     }
-    //update Login user data update 
+
+    //update Login user data  
     public function userProfileUpdate(){
         $name=$_POST['name'];
         $email=$_POST['email'];

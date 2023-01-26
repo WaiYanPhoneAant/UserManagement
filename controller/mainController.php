@@ -13,7 +13,8 @@ class mainController{
         Auth::check();
         Role::checkAdmin();
     }
-    //direct dashboard
+
+    //direct to dashboard
     public function dashboard(){
         $query= "SELECT users.*,role_name ,role_id From users LEFT
         JOIN  role ON users.role=role.role_id";
@@ -28,7 +29,8 @@ class mainController{
         $data=User::build()->executeQuery($query);
         return view('dashboard',['data'=>$data]);
     }
-    //filterfunction
+
+    //filterfunctions
     public function userOnlyDashboard(){
         $this->userFilter('user');
     }
@@ -41,7 +43,8 @@ class mainController{
         $this->userFilter('moderator');
     }
 
-    // filter function
+
+    //function for filter 
     private function userFilter($role){
         $query= "SELECT users.*,role_name ,role_id From users LEFT
         JOIN  role ON users.role=role.role_id WHERE role.role_name='$role'";
@@ -57,13 +60,15 @@ class mainController{
            
         return view('dashboard',['data'=>$data,'page'=>$role]);
     }
-    public function create(){
-        $pdo=User::build()->create([
-            "email"=>$_REQUEST['email'],
-            "name"=>$_REQUEST['name'],
-            "address"=>$_REQUEST['address'],
-            "password"=>$_REQUEST['password']
-        ]);
-        return redirect('/');
-    }
+
+    // create user
+    // public function create(){
+    //     $pdo=User::build()->create([
+    //         "email"=>$_REQUEST['email'],
+    //         "name"=>$_REQUEST['name'],
+    //         "address"=>$_REQUEST['address'],
+    //         "password"=>$_REQUEST['password']
+    //     ]);
+    //     return redirect('/');
+    // }
 }

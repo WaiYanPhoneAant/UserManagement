@@ -6,7 +6,9 @@ user management with pure php(framework thinking)
   git clone https://github.com/WaiYanPhoneAant/UserManagement.git
   cd UserManagement
 ```
-
+```bash
+  cd UserManagement
+```
 
 ## Database configuration in config.php
 
